@@ -1,0 +1,39 @@
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'app.css' %}" />
+    {% block css_files %}
+    {% endblock %}
+  </head>
+  <body>
+    <header id="main-navigation">
+      <h1><a href="{% url 'starting-page' %}">Yazılım Kasabası</a></h1>
+      <nav>
+        {% if user.is_authenticated %}
+          <a href="{% url 'create-post' %}">Yeni Hikaye</a>
+          <a href="{% url 'posts-page' %}">Keşfet</a>
+          <a href="{% url 'user-posts' %}">Gönderilerim</a>
+          <a href="{% url 'read-later' %}">Favoriler</a>
+          <a href="{% url 'logout' %}">Çıkış Yap</a>
+        {% else %}
+          <a href="{% url 'posts-page' %}">Keşfet</a>
+          <a href="{% url 'login' %}">Giriş Yap</a>
+          <a href="{% url 'register' %}">Kayıt Ol</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Giriş
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "user/login.css" %}" />
+{% endblock %}
+
+
+{% block content %}
+<section id="login">
+  <h2>Giriş</h2>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Giriş</button>
+  </form>
+  <p>Mevcut hesabınız yok mu? <a href="{% url 'register' %}">Yeni hesap oluştur</a></p>
+</section>
+{% endblock %}

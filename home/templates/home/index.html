@@ -1,0 +1,44 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %} 
+Yazılım Kasabası
+{% endblock %} 
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "blog/post.css" %}" />
+  <link rel="stylesheet" href="{% static "home/index.css" %}" />
+{% endblock %}
+
+{% block content %}
+<section id="welcome">
+  <header>
+    <img src="{% static "home/images/hello.jpeg" %}" alt=" Hello World" />
+    <h2>Her başlangıcın özü 'Hello World' gibidir; 
+      basit, güçlü ve büyük bir keşfin başlangıcı</h2>
+  </header>
+  <p>Merhaba, Yazılım Kasabasına Hoşgeldin 😄</p>
+</section>
+
+<section id="latest-posts">
+  <h2>Keşfet</h2>
+  <ul>
+    {% for post in posts %}
+      {% include "blog/includes/post.html" %}
+    {% endfor %}
+  </ul>
+</section>
+
+<section id="about">
+  <h2>Biz Kimiz?</h2>
+  <p>
+    Yazılım dünyasına adım atmak isteyenler ve bu alanda tutkulu olan herkes sayfamıza katılabilmektedir.
+  </p>
+  <p>
+    Amacım yazılım alanında kedini geliştiren herkesi bir araya getirmek ve
+    bu süreçte ki herkesin deneyimlerini paylaşabilmesini sağlamak 😄
+    Umarım size yardımcı olabiliriz..
+  </p>
+</section>
+
+{% endblock %}

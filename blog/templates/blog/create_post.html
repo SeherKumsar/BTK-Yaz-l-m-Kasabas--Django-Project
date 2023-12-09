@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Yeni Post Oluştur
+{% endblock %}
+
+{% block css_files %} 
+    <link rel="stylesheet" href="{% static "blog/create_post.css" %}" />
+{% endblock %} 
+
+{% block content %}
+<section id="create-post">
+  <h2>Yeni Post Oluştur</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {% for form_field in post_form %}
+      <div class="form-control 
+      {% if form_field.errors %}invalid
+      {% endif %}">
+        {{ form_field.label_tag }}
+        {{ form_field }}
+        {{ form_field.errors }}
+      </div>
+    {% endfor %}
+    
+    <button type="submit">Postu Kaydet</button>
+  </form>
+</section>
+{% endblock %}

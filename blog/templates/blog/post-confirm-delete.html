@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block title %}
+"{{ object }}" silinmesini onaylayın
+{% endblock %} 
+
+{% block css_files %} 
+    <link rel="stylesheet" href="{% static "blog/post-confirm-delete.css" %}" />
+{% endblock %}
+
+{% block content %}
+<section id="delete-post">
+  <p>"{{ object }}" Silmek istediğine emin misin?</p>
+  <form method="post" action="{% url 'post-confirm-delete' slug=object.slug %}">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete">
+  </form>
+
+  <p><a href="{% url 'user-posts' %}">İptal</a></p>
+{% endblock %}

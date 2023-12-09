@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Kayıt
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "user/register.css" %}" />
+{% endblock %}
+
+{% block content %}
+<section id="sign-up">
+  <h2>Kayıt</h2>
+  
+  {% if form.errors %}
+    <div class="error-message">
+      <h3>Registration failed:</h3>
+      <ul>
+        {% for field_errors in form.errors.values %}
+          {% for error in field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Kayıt Ol</button>
+  </form>
+  <p>Zaten bir hesabınız var mı? <a href="{% url 'login' %}">Giriş Yap</a></p>
+</section>
+{% endblock %}
